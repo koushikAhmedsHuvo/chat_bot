@@ -12,7 +12,7 @@ const ChatPage = ({ expanded }) => {
 
   return (
     <div
-      className="w-[442px] h-[610px]"
+      className="w-[280px] h-[420px]"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundRepeat: 'no-repeat',

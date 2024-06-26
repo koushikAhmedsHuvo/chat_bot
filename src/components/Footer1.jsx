@@ -13,7 +13,7 @@ const Footer1 = ({ expanded }) => {
   if (!expanded) return null;
 
   return (
-    <div className="p-4 w-[442px] bg-white border-t border shadow-md rounded-t-lg">
+    <div className="p-2 w-[280px] bg-white border-t border shadow-md rounded-t-lg">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col">
           <div className="flex items-center p-2 rounded-full border border-black shadow-sm">
@@ -46,7 +46,7 @@ const Footer1 = ({ expanded }) => {
           <input
             type="text"
             placeholder="..."
-            className="w-full px-4 py-2 border border-black rounded-full focus:outline-none focus:ring-2 focus:ring-[#BF2879] shadow-sm"
+            className="w-full px-4 py-1 border border-black rounded-full  shadow-sm"
           />
         </div>
       </div>

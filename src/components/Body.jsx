@@ -10,36 +10,35 @@ const Body = ({ expanded }) => {
 
   return (
     <div
-      className="w-[442px] h-[610px]"
+      className="w-[280px] h-[420px] bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'contain',
         backgroundPosition: 'center',
-        backgroundSize: 'cover',
         // Ensure the div takes the full viewport width
         overflow: 'hidden',
         borderRadius: '0 0 10px 10px',
       }}
     >
       <div className="flex flex-col items-center">
-        <div className="text-center w-[326px] h-[122px] mt-10 mb-4">
-          <h1 className="text-4xl font-bold text-white font-sans mb-3">
+        <div className="text-center  mt-5 mb-3">
+          <h1 className="text-3xl font-bold text-white font-sans mb-1">
             {bodyData.title}
           </h1>
-          <h1 className="text-4xl font-semibold font-sans text-white">
+          <h1 className="text-3xl font-semibold font-sans text-white">
             {bodyData.subtitle}
           </h1>
         </div>
-        <div className="mb-4">
-          <img src={logo} alt="MedBot Logo" className="h-[94px] w-[92px]" />
+        <div className="mb-3">
+          <img src={logo} alt="MedBot Logo" className="h-[70px] w-[68px]" />
         </div>
-        <div className="mb-10 w-[290px] h-[76px] flex items-center justify-center">
-          <p className="text-4xl text-white font-huba text-center">
+        <div className="mb-5 w-[200px]  flex items-center justify-center">
+          <p className="text-3xl text-white font-huba text-center">
             {bodyData.message}
           </p>
         </div>
         <div>
-          <button className="bg-white font-jockey text-3xl text-black w-[276px] h-[62px] rounded-[30px] shadow-lg">
+          <button className="bg-white font-jockey text-3xl text-black w-[250px] h-[58px] rounded-[30px] shadow-lg">
             {bodyData.buttonText}
           </button>
         </div>

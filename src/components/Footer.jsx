@@ -12,13 +12,13 @@ const Footer = ({ expanded }) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  if (!expanded) return null; // Hide component if not expanded
+   if (!expanded) return null; // Hide component if not expanded
 
   return (
-    <div className="relative w-[442px] h-[72px] shadow-md border">
+    <div className="relative w-[280px]  shadow-md border">
       <div className="flex flex-col items-center text-white">
-        <div className="mb-4 -mt-12 border border-black rounded-full flex items-center justify-center bg-white shadow-lg">
-          <IoMicOutline className="text-[#BF2879] w-[80px] h-[80px] p-2" />
+        <div className="mb-3 -mt-12 border border-black rounded-full flex items-center justify-center bg-white shadow-lg">
+          <IoMicOutline className="text-[#BF2879] w-[70px] h-[70px] p-2" />
         </div>
         <div className="absolute  ">
           <IoIosArrowUp
