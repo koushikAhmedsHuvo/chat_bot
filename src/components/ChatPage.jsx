@@ -1,14 +1,8 @@
 import React from 'react';
 import backgroundImage from '../assets/body.png';
 
-const ChatPage = ({ expanded }) => {
+const ChatPage = ({ expanded, messages }) => {
   if (!expanded) return null;
-  const messages = [
-    { id: 1, text: 'Hi, I am a chatbot. How can I help you?', sender: 'bot' },
-    { id: 2, text: 'I need help.', sender: 'user' },
-    { id: 3, text: 'How can i help you?', sender: 'bot' },
-    { id: 4, text: 'I want to fix an appoinment', sender: 'user' },
-  ];
 
   return (
     <div

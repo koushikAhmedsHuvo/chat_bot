@@ -3,13 +3,26 @@ import { IoMicOutline } from 'react-icons/io5';
 import { IoIosArrowUp } from 'react-icons/io';
 import data from '../data.json'; // Assuming you have a JSON file named data.json
 
-const Footer1 = ({ expanded }) => {
+const Footer1 = ({ expanded, onSendMessage }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
   const dropdownOptions = data.dropdown;
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && inputValue.trim()) {
+      onSendMessage(inputValue.trim());
+      setInputValue('');
+    }
+  };
+
   if (!expanded) return null;
 
   return (
@@ -27,7 +40,7 @@ const Footer1 = ({ expanded }) => {
               onClick={toggleDropdown}
             />
             {isDropdownOpen && (
-              <div className="absolute top-10 ml-10 mt-[-280px]  bg-white border rounded-lg shadow-md p-2">
+              <div className="absolute top-10 ml-10 mt-[-280px] bg-white border rounded-lg shadow-md p-2">
                 <ul className="list-none">
                   {dropdownOptions.map((option) => (
                     <li
@@ -45,8 +58,11 @@ const Footer1 = ({ expanded }) => {
         <div className="flex-grow mx-3">
           <input
             type="text"
-            placeholder="..."
-            className="w-full px-4 py-1 border border-black rounded-full  shadow-sm"
+            placeholder="Type your message..."
+            className="w-full px-4 py-2 border border-black rounded-full focus:outline-none focus:ring-2 focus:ring-[#BF2879] shadow-sm"
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
           />
         </div>
       </div>
