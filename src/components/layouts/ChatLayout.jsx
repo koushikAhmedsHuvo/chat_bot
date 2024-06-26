@@ -5,7 +5,7 @@ import ChatPage from '../ChatPage';
 import Footer1 from '../Footer1';
 
 const ChatLayout = () => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
