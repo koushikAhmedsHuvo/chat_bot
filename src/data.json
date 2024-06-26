@@ -1,0 +1,18 @@
+{
+  "body": {
+    "title": "Hello",
+    "subtitle": "I'm MedBot",
+    "message": "How can I help you?",
+    "buttonText": "I want to know"
+  },
+  "footer": {
+    "poweredBy": "Powered By: Excite AI Limited"
+  },
+  "dropdown": [
+    { "value": "eng", "label": "English" },
+    { "value": "fr", "label": "French" },
+    { "value": "fr", "label": "Bangali" },
+    { "value": "fr", "label": "Hindi" },
+    { "value": "fr", "label": "Urdu" }
+  ]
+}
