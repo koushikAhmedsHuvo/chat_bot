@@ -4,7 +4,7 @@ import logo from '../assets/logo.png';
 
 const Header = ({ expanded, toggleExpand }) => {
   return (
-    <div className="bg-white w-[442px] h-[65px] shadow-md rounded-md">
+    <div className="bg-white w-[442px] h-[65px] shadow-md border rounded-md">
       <div className="flex flex-row justify-between items-center h-full px-4">
         <div className="flex items-center">
           <img src={logo} alt="Logo" className="w-[147px] h-[37px] ml-5" />
