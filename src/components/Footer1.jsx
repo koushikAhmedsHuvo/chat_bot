@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IoMicOutline } from 'react-icons/io5';
+import { IoMicOutline, IoChatbubblesOutline } from 'react-icons/io5';
 import { IoIosArrowUp } from 'react-icons/io';
 import data from '../data.json';
 
@@ -7,6 +7,7 @@ const Footer1 = ({ expanded, onSendMessage }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [isListening, setIsListening] = useState(false);
+  const [interimValue, setInterimValue] = useState('');
   const dropdownOptions = data.dropdown;
 
   const toggleDropdown = () => {
@@ -25,7 +26,7 @@ const Footer1 = ({ expanded, onSendMessage }) => {
   };
 
   const handleMicClick = () => {
-    setIsListening(!isListening);
+    setIsListening((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -37,14 +38,17 @@ const Footer1 = ({ expanded, onSendMessage }) => {
       recognition.lang = 'en-US';
 
       recognition.onresult = (event) => {
+        let finalTranscript = '';
         let interimTranscript = '';
         for (let i = event.resultIndex; i < event.results.length; ++i) {
           if (event.results[i].isFinal) {
-            setInputValue(event.results[i][0].transcript);
+            finalTranscript += event.results[i][0].transcript;
           } else {
             interimTranscript += event.results[i][0].transcript;
           }
         }
+        setInputValue((prevValue) => prevValue + finalTranscript);
+        setInterimValue(interimTranscript);
       };
 
       recognition.start();
@@ -72,11 +76,15 @@ const Footer1 = ({ expanded, onSendMessage }) => {
         <div className="flex flex-col">
           <div
             className={`flex items-center p-2 rounded-full border border-black shadow-sm ${
-              isListening ? 'bg-red-500' : ''
+              isListening ? 'text-red-500' : ''
             }`}
             onClick={handleMicClick}
           >
-            <IoMicOutline className="text-[#BF2879] text-3xl" />
+            {isListening ? (
+              <IoChatbubblesOutline className="text-[#BF2879] text-3xl" />
+            ) : (
+              <IoMicOutline className="text-[#BF2879] text-3xl" />
+            )}
           </div>
           <div className="relative">
             <IoIosArrowUp
@@ -106,7 +114,7 @@ const Footer1 = ({ expanded, onSendMessage }) => {
             type="text"
             placeholder="Type your message..."
             className="w-full px-4 py-2 border border-black rounded-full focus:outline-none focus:ring-2 focus:ring-[#BF2879] shadow-sm"
-            value={inputValue}
+            value={inputValue + interimValue}
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
           />

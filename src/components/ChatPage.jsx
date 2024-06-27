@@ -1,22 +1,29 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import backgroundImage from '../assets/body.png';
 
 const ChatPage = ({ expanded, messages }) => {
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
   if (!expanded) return null;
 
   return (
     <div
-      className="w-[280px] h-[420px]"
+      className="w-[280px] h-[420px] overflow-hidden"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        overflow: 'hidden',
         borderRadius: '0 0 10px 10px',
       }}
     >
-      <div className="flex flex-col p-4 space-y-4">
+      <div className="flex flex-col p-4 space-y-4 h-full overflow-y-auto">
         {messages.map((message) => (
           <div
             key={message.id}
@@ -29,6 +36,7 @@ const ChatPage = ({ expanded, messages }) => {
             <p>{message.text}</p>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
     </div>
   );
