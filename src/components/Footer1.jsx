@@ -8,7 +8,16 @@ const Footer1 = ({ expanded, onSendMessage }) => {
   const [inputValue, setInputValue] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [interimValue, setInterimValue] = useState('');
+  const [language, setLanguage] = useState('en-US');
   const dropdownOptions = data.dropdown;
+
+  const languages = [
+    { value: 'en-US', label: 'English' },
+    { value: 'bn-BD', label: 'Bangla' },
+    { value: 'fr-FR', label: 'French' },
+    { value: 'ur-PK', label: 'Urdu' },
+    { value: 'hi-IN', label: 'Hindi' },
+  ];
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -19,7 +28,8 @@ const Footer1 = ({ expanded, onSendMessage }) => {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && inputValue.trim()) {
+    if (e.key === 'Enter' && !e.shiftKey && inputValue.trim()) {
+      e.preventDefault();
       onSendMessage(inputValue.trim());
       setInputValue('');
     }
@@ -29,49 +39,66 @@ const Footer1 = ({ expanded, onSendMessage }) => {
     setIsListening((prevState) => !prevState);
   };
 
+  const handleLanguageChange = (lang) => {
+    setLanguage(lang);
+    setIsDropdownOpen(false);
+  };
+
   useEffect(() => {
     let recognition;
+
+    const handleRecognitionStart = () => {
+      setIsListening(true);
+      setInterimValue('');
+    };
+
+    const handleRecognitionEnd = () => {
+      setIsListening(false);
+    };
+
+    const handleRecognitionResult = (event) => {
+      let finalTranscript = '';
+      let interimTranscript = '';
+
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        if (event.results[i].isFinal) {
+          finalTranscript += event.results[i][0].transcript;
+        } else {
+          interimTranscript += event.results[i][0].transcript;
+        }
+      }
+
+      setInputValue((prevValue) => prevValue + finalTranscript.trim());
+      setInterimValue(interimTranscript.trim());
+    };
+
     if (isListening) {
       recognition = new window.webkitSpeechRecognition();
       recognition.continuous = true;
       recognition.interimResults = true;
-      recognition.lang = 'en-US';
+      recognition.lang = language;
 
-      recognition.onresult = (event) => {
-        let finalTranscript = '';
-        let interimTranscript = '';
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) {
-            finalTranscript += event.results[i][0].transcript;
-          } else {
-            interimTranscript += event.results[i][0].transcript;
-          }
-        }
-        setInputValue((prevValue) => prevValue + finalTranscript);
-        setInterimValue(interimTranscript);
-      };
+      recognition.onstart = handleRecognitionStart;
+      recognition.onend = handleRecognitionEnd;
+      recognition.onresult = handleRecognitionResult;
 
       recognition.start();
-
-      recognition.onend = () => {
-        if (isListening) {
-          recognition.start();
-        }
-      };
     }
 
     return () => {
       if (recognition) {
         recognition.stop();
+        recognition.onstart = null;
         recognition.onend = null;
+        recognition.onresult = null;
       }
     };
-  }, [isListening]);
+  }, [isListening, language]);
 
   if (!expanded) return null;
 
   return (
-    <div className="p-2 w-[280px] bg-white border-t border shadow-md rounded-t-lg">
+    <div className="p-1 w-[280px] bg-white border-t border shadow-md rounded-t-lg">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col">
           <div
@@ -96,10 +123,11 @@ const Footer1 = ({ expanded, onSendMessage }) => {
             {isDropdownOpen && (
               <div className="absolute top-10 ml-10 mt-[-280px] bg-white border rounded-lg shadow-md p-2">
                 <ul className="list-none">
-                  {dropdownOptions.map((option) => (
+                  {languages.map((option) => (
                     <li
                       key={option.value}
                       className="cursor-pointer text-black p-2 rounded hover:bg-gray-100"
+                      onClick={() => handleLanguageChange(option.value)}
                     >
                       {option.label}
                     </li>
@@ -110,13 +138,14 @@ const Footer1 = ({ expanded, onSendMessage }) => {
           </div>
         </div>
         <div className="flex-grow mx-3">
-          <input
-            type="text"
+          <textarea
             placeholder="Type your message..."
-            className="w-full px-4 py-2 border border-black rounded-full focus:outline-none focus:ring-2 focus:ring-[#BF2879] shadow-sm"
+            className="w-full mt-1 px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF2879] shadow-sm resize-none overflow-y-auto max-h-40"
+            style={{ scrollbarWidth: 'none' }}
             value={inputValue + interimValue}
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
+            rows={1}
           />
         </div>
       </div>

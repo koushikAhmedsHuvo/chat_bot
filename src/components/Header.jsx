@@ -4,10 +4,10 @@ import logo from '../assets/logo.png';
 
 const Header = ({ expanded, toggleExpand }) => {
   return (
-    <div className="bg-white w-[280px] h-[65px] shadow-md border rounded-md">
+    <div className="bg-white w-[270px] h-[53px] shadow-md border rounded-md">
       <div className="flex flex-row justify-between items-center h-full px-4">
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="w-[147px] h-[37px] ml-5" />
+          <img src={logo} alt="Logo" className="w-[130px] h-[30px] ml-3" />
         </div>
         <div className="flex items-center space-x-4">
           <button
@@ -15,8 +15,8 @@ const Header = ({ expanded, toggleExpand }) => {
             onClick={toggleExpand}
           >
             <FaChevronDown
-              size={32}
-              className={`mr-5 text-[#BF2879] ${
+              size={28}
+              className={`mr-3 text-[#BF2879] ${
                 expanded ? 'transform rotate-0' : 'transform rotate-180'
               }`}
             />

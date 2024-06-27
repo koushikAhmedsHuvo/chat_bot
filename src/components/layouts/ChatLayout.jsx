@@ -9,13 +9,13 @@ const ChatLayout = () => {
 
   useEffect(() => {
     if (expanded) {
-      // Simulate bot message after 2 seconds
-      const timer = setTimeout(() => {
-        setMessages([{ id: 1, text: 'How can I help you?', sender: 'bot' }]);
-      }, 2000);
-
-      // Cleanup the timer
-      return () => clearTimeout(timer);
+      setMessages([
+        {
+          id: 1,
+          text: 'How can I help you?',
+          sender: 'bot',
+        },
+      ]);
     }
   }, [expanded]);
 

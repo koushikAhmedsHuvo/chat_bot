@@ -10,7 +10,7 @@ const Body = ({ expanded }) => {
 
   return (
     <div
-      className="w-[280px] h-[420px] bg-cover bg-center bg-no-repeat"
+      className="w-[270px] h-[400px] bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'contain',
@@ -38,7 +38,7 @@ const Body = ({ expanded }) => {
           </p>
         </div>
         <div>
-          <button className="bg-white font-jockey text-3xl text-black w-[250px] h-[58px] rounded-[30px] shadow-lg">
+          <button className="bg-white font-jockey text-3xl text-black w-[240px] h-[55px] rounded-[30px] shadow-lg">
             {bodyData.buttonText}
           </button>
         </div>
