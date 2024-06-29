@@ -8,11 +8,11 @@ const Footer1 = ({ expanded, onSendMessage }) => {
   const [inputValue, setInputValue] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [interimValue, setInterimValue] = useState('');
-  const [language, setLanguage] = useState('en-US');
+  const [language, setLanguage] = useState('en-US'); // Default language is English
   const dropdownOptions = data.dropdown;
 
   const languages = [
-    { value: 'en-US', label: 'English' },
+    { value: 'en-US', label: 'Eng' },
     { value: 'bn-BD', label: 'Bangla' },
     { value: 'fr-FR', label: 'French' },
     { value: 'ur-PK', label: 'Urdu' },
@@ -102,7 +102,7 @@ const Footer1 = ({ expanded, onSendMessage }) => {
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col">
           <div
-            className={`flex items-center p-2 rounded-full border border-black shadow-sm ${
+            className={`flex items-center p-3 rounded-full border border-black shadow-sm ${
               isListening ? 'text-red-500' : ''
             }`}
             onClick={handleMicClick}
@@ -110,18 +110,21 @@ const Footer1 = ({ expanded, onSendMessage }) => {
             {isListening ? (
               <IoChatbubblesOutline className="text-[#BF2879] text-3xl" />
             ) : (
-              <IoMicOutline className="text-[#BF2879] text-3xl" />
+              <IoMicOutline className="text-[#BF2879] text-4xl" />
             )}
           </div>
           <div className="relative">
             <IoIosArrowUp
-              className={`-mt-6 ml-8 cursor-pointer ${
+              className={`-mt-8 ml-10 cursor-pointer ${
                 isDropdownOpen ? 'transform rotate-180' : ''
               }`}
               onClick={toggleDropdown}
             />
+            <div className="absolute -top-5 ml-9 text-gray-600 text-xs">
+              {languages.find((lang) => lang.value === language)?.label}
+            </div>
             {isDropdownOpen && (
-              <div className="absolute top-10 ml-10 mt-[-280px] bg-white border rounded-lg shadow-md p-2">
+              <div className="absolute top-10 ml-10 mt-[-288px] bg-white border rounded-lg shadow-md p-2">
                 <ul className="list-none">
                   {languages.map((option) => (
                     <li
