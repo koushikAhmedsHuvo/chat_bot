@@ -1,18 +1,17 @@
 import React from 'react';
-import logo from '../assets/Group.png';
-import backgroundImage from '../assets/body.png';
 import data from '../data.json';
 
 const Body = ({ expanded }) => {
   if (!expanded) return null; // Hide component if not expanded
 
   const bodyData = data.body;
+  const imageData = data.images;
 
   return (
     <div
       className="w-[270px] h-[400px] bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `url(${imageData.chatPage})`,
         backgroundSize: 'contain',
         backgroundPosition: 'center',
         // Ensure the div takes the full viewport width
@@ -30,7 +29,11 @@ const Body = ({ expanded }) => {
           </h1>
         </div>
         <div className="mb-3">
-          <img src={logo} alt="MedBot Logo" className="h-[70px] w-[68px]" />
+          <img
+            src={imageData.group}
+            alt="MedBot Logo"
+            className="h-[70px] w-[68px]"
+          />
         </div>
         <div className="mb-5 w-[200px]  flex items-center justify-center">
           <p className="text-3xl text-white font-huba text-center">

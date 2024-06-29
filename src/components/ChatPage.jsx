@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import backgroundImage from '../assets/body.png';
+import data from '../data.json';
 
 const ChatPage = ({ expanded, messages }) => {
   const messagesEndRef = useRef(null);
+  const imageData = data.images;
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -16,7 +17,7 @@ const ChatPage = ({ expanded, messages }) => {
     <div
       className="w-[270px] h-[400px] overflow-hidden"
       style={{
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `url(${imageData.chatPage})`,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'cover',

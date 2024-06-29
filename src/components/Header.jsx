@@ -1,13 +1,18 @@
 import React from 'react';
 import { FaChevronDown } from 'react-icons/fa';
-import logo from '../assets/logo.png';
+import data from '../data.json';
 
 const Header = ({ expanded, toggleExpand }) => {
+  const imageData = data.images;
   return (
     <div className="bg-white w-[270px] h-[53px] shadow-md border rounded-md">
       <div className="flex flex-row justify-between items-center h-full px-4">
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="w-[130px] h-[30px] ml-3" />
+          <img
+            src={imageData.logo}
+            alt="Logo"
+            className="w-[130px] h-[30px] ml-3"
+          />
         </div>
         <div className="flex items-center space-x-4">
           <button

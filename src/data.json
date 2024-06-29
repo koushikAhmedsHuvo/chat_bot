@@ -14,5 +14,11 @@
     { "value": "fr", "label": "Ban" },
     { "value": "fr", "label": "Hindi" },
     { "value": "fr", "label": "Urdu" }
-  ]
+  ],
+  "images": {
+    "logo": "https://i.ibb.co/BKF26Dz/logo.png",
+    "chatPage": "https://i.ibb.co/QkPBrKC/body-Bym-Tc07-B.png",
+    "icon": "https://i.ibb.co/1ZgTC92/MedBot-1.png",
+    "group": "https://i.ibb.co/kcG7ssc/Group-Doh-Fhv-NL.png"
+  }
 }
